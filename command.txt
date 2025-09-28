@@ -1,2 +1,22 @@
 #kubeai 적용을 위한한 command 모음
 
+#github 기본 가이드
+
+helm repo add kubeai https://www.kubeai.org
+helm repo update
+
+helm upgrade --install kubeai kubeai/kubeai --wait --timeout 10m
+
+# kubeai helm install
+helm dependency build /app/mykubeai/kubeai
+helm install kubeai /app/mykubeai/kubeai --namespace kubeai --create-namespace
+
+# model install
+helm install kubeai-models /app/mykubeai/models
+
+=> values.yaml에서
+minReplicas: 1 값을 지정하지 않으면 pod가 생성되지 않는다.
+
+
+# upgrade
+helm upgrade --install kubeai-models /app/mykubeai/models --namespace kubeai --create-namespace
