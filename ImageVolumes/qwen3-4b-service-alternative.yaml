@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: qwen3-4b-service-alt
+  namespace: kubeai
+  labels:
+    app: qwen3-4b-alt
+spec:
+  selector:
+    app: qwen3-4b-alt
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+  type: ClusterIP

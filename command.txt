@@ -1,0 +1,1 @@
+#kubeai 적용을 위한한 command 모음
