@@ -14,10 +14,10 @@ catalog:
     minReplicas: 1
     resourceProfile: amd-gpu-rx9070xt:1
 
-  qwen3-1-7b-fp8-vllm:
+  qwen3-4b-vllm:
     enabled: true
     features: [TextGeneration]
-    url: hf://Qwen/Qwen3-1.7B-FP8
+    url: hf://Qwen/Qwen3-4B
     engine: VLLM
     env:
       HIP_FORCE_DEV_KERNARG: "1"
@@ -34,7 +34,7 @@ catalog:
       - --tensor-parallel-size=1
       - --gpu-memory-utilization=0.9
       - --max-seq-len-to-capture=4096
-      - --kv-cache-dtype=fp8
     minReplicas: 1
     resourceProfile: amd-gpu-rx9070xt:1
     targetRequests: 64
+    cacheProfile: model-cache-80gb

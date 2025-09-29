@@ -216,7 +216,11 @@ resourceProfiles:
         operator: "Equal"
         value: "present"
         effect: "NoSchedule"
-cacheProfiles: {}
+cacheProfiles:
+  model-cache-80gb:
+    sharedFilesystem:
+      storageClassName: "standard"
+      size: "80Gi"
 
 modelAutoscaling:
   # Interval that the autoscaler will scrape model server metrics.

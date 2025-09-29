@@ -21,9 +21,13 @@ minReplicas: 1 값을 지정하지 않으면 pod가 생성되지 않는다.
 # upgrade
 helm upgrade --install kubeai-models /app/mykubeai/models --namespace kubeai --create-namespace
 
+helm uninstall kubeai-models
 
 # revision rollback 내용은 지정된 revision으로 돌아가지만 revision 숫자는 증가함
 helm rollback kubeai-models 7 -n kubeai
+
+
+
 
 
 # Image volumes
