@@ -1,11 +1,46 @@
+all:
+  enabled: false
+
 catalog:
   qwen3-06b-gpu:
-    enabled: true
+    enabled: false
     features: ["TextGeneration"]
     url: "ollama://qwen3:0.6b"
     engine: OLlama
+    env:
+      OLLAMA_KEEP_ALIVE: "1" # Keep the model loaded in memory
+      OLLAMA_MAX_LOADED_MODELS: "2"
+      OLLAMA_FLASH_ATTENTION: "true" # Enable Flash Attention
     minReplicas: 1
     resourceProfile: amd-gpu-rx9070xt:1
+
+  qwen3-1-7b-fp8-vllm:
+    enabled: true
+    features: [TextGeneration]
+    url: hf://Qwen/Qwen3-1.7B-FP8
+    engine: VLLM
+    env:
+      HIP_FORCE_DEV_KERNARG: "1"
+      NCCL_MIN_NCHANNELS: "112"
+      TORCH_BLAS_PREFER_HIPBLASLT: "1"
+      VLLM_USE_TRITON_FLASH_ATTN: "0"
+      VLLM_FP8_PADDING: "0"
+    args:
+      - --trust-remote-code
+      # Reduced parameters for 16GB VRAM to avoid KV cache issues
+      - --max-model-len=8192
+      - --max-num-batched-token=4096
+      - --max-num-seqs=64
+      - --num-scheduler-steps=4
+      - --tensor-parallel-size=1
+      - --gpu-memory-utilization=0.9
+      - --disable-log-requests
+      - --enable-chunked-prefill=false
+      - --max-seq-len-to-capture=4096
+      - --kv-cache-dtype=fp8
+    minReplicas: 1
+    resourceProfile: amd-gpu-rx9070xt:1
+    targetRequests: 64
 
   deepseek-r1-mi300x:
     enabled: false

@@ -20,3 +20,22 @@ minReplicas: 1 값을 지정하지 않으면 pod가 생성되지 않는다.
 
 # upgrade
 helm upgrade --install kubeai-models /app/mykubeai/models --namespace kubeai --create-namespace
+
+
+# revision rollback 내용은 지정된 revision으로 돌아가지만 revision 숫자는 증가함
+helm rollback kubeai-models 7 -n kubeai
+
+
+# Image volumes
+
+cozy in 🌐 ubuntu24 in ☸ minikube (kubeai) /app/mykubeai/ImageVolumes on  main +18/-61 [🗑📝✓] via 🐑3GiB/31GiB 🎮5% 
+➜ kubectl delete -f qwen3-4b-pod.yaml 
+pod "qwen3-4b-pod" deleted from kubeai namespace
+
+cozy in 🌐 ubuntu24 in ☸ minikube (kubeai) /app/mykubeai/ImageVolumes on  main +18/-61 [🗑📝✓] via 🐑3GiB/31GiB 🎮5% took 30s 
+➜ kubectl delete -f qwen3-4b-service.yaml 
+service "qwen3-4b-service" deleted from kubeai namespace
+
+cozy in 🌐 ubuntu24 in ☸ minikube (kubeai) /app/mykubeai/ImageVolumes on  main +18/-61 [🗑📝✓] via 🐑3GiB/31GiB 🎮5% 
+➜ kubectl delete -f qwen3-4b-pvc.yaml    
+persistentvolumeclaim "qwen3-4b-pvc" deleted from kubeai namespace

@@ -206,6 +206,7 @@ resourceProfiles:
         operator: "Equal"
         value: "present"
         effect: "NoSchedule"
+## 사용자가 정의 후 추가
   amd-gpu-rx9070xt:
     imageName: "amd-gpu"
     limits:
