@@ -32,7 +32,7 @@ catalog:
       - --max-num-batched-token=4096
       - --max-num-seqs=64
       - --tensor-parallel-size=1
-      - --gpu-memory-utilization=0.9
+      - --gpu-memory-utilization=0.7 # 0.6 지정시 에러 발생 0.7 성공 vram 12G
       - --max-seq-len-to-capture=4096
     minReplicas: 1
     resourceProfile: amd-gpu-rx9070xt:1
