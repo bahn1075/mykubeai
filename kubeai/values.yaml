@@ -245,6 +245,8 @@ open-webui:
   pipelines:
     enabled: false
   openaiBaseApiUrl: "http://kubeai/openai/v1"
+  service:
+    type: LoadBalancer
   extraEnvVars:
   - name: WEBUI_AUTH
     value: "False"
